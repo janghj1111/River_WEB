@@ -1,4 +1,4 @@
-package river.board.vo;
+package river.login.vo;
 
 public class UserVO {
 

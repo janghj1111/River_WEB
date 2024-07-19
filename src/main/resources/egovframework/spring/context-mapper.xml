@@ -5,13 +5,17 @@
 	<!-- SqlSession setup for MyBatis Database Layer -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/egovframework/sqlmap/example/sql-mapper-config.xml" />
-		<property name="mapperLocations" value="classpath:/egovframework/sqlmap/example/mappers/*.xml" />
+		<!-- <property name="configLocation" value="classpath:/egovframework/sqlmap/example/sql-mapper-config.xml" /> 
+		ibatis 설정파일이라서 sqlmap 하위 폴더와 constext-sqlmap을 지웠음 -->
+		<property name="mapperLocations" value="classpath*:/egovframework/sqlmap/**/*Mapper.xml" />
+		<!-- <property name="mapperLocations" value="classpath:/egovframework/sqlmap/example/mappers/*.xml" /> -->
 	</bean>
 
 	<!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
  	<bean class="org.egovframe.rte.psl.dataaccess.mapper.MapperConfigurer">
-		<property name="basePackage" value="egovframework.example.sample.service.impl" />
+ 		<property name="basePackage" value="**.**.dao" />
+ 		<!-- value의 경로에서 @Mapper 어노테이션을 찾겠다는 뜻 -->
+		<!-- <property name="basePackage" value="egovframework.example.sample.service.impl" /> -->
 	</bean>
     
 </beans>
