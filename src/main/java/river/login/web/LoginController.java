@@ -41,7 +41,7 @@ public class LoginController {
 			resultMap = loginService.httpServletReqTest(request);
 			model.addAttribute("userId", resultMap.get("userid").toString());
 			model.addAttribute("userPw", resultMap.get("userpw").toString());
-			return "login/login"; 
+			return "login/test"; 
 		} catch (Exception e) {
 			logger.info("##### 에러로 갔음 #####");
 			e.printStackTrace();

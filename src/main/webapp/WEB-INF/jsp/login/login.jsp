@@ -24,14 +24,15 @@
 		<input type="submit" value="제출">
 	</form> 
 	-->
-	<div>zzzz</div>
-	<%--<div class="login">
+	<div>${userId}</div><br />
+	<div>${userPw}</div><br />
+	<div class="login">
 		<div class="login_left">
             <img src="<%=request.getContextPath() %>/images/lefimg.jpg" class="img1">
         </div>
         <div class="login_right">
         	<form name="LoginForm" id="LoginForm" class="LoginForm" action="loginsubmit.do" method="post">
-        		<div><span style="color:green;"> LVT 108 </span></div>
+        		<div><span style="color:green;"> RVT 108 </span></div>
         		<div style="height: 20px;"></div>
         		<div>
         			아이디
@@ -60,9 +61,9 @@
         	</form>
         </div>
         	
-	</div>  --%>
+	</div>
 </body>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 
 $(document).ready(function(){ // $(function(){
 	
@@ -138,5 +139,5 @@ function chkCharCode(event) {
 };
 
 
-</script> -->
+</script>
 </html>
