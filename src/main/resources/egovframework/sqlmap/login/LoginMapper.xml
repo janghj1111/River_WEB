@@ -2,11 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- <mapper namespace="egovframework.sqlmap.login.LoginMapper"></mapper> -->
 <mapper namespace="river.login.dao.LoginMapper">
+
+	<select id="checkLogin" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT userid, userpw
+		FROM tbl_user
+		WHERE userid = #{paramId}
+	</select>
+
 	<select id="httpServletReqTest" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT 
 			userid
 			, userpw
 		FROM tbl_user
+		<!-- WHERE userid LIKE '%jang%' -->
 	</select>
 
 </mapper>

@@ -3,14 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> <!-- lang="en" -->
 <head>
-	<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Login</title>
-	<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/login.css">
-    <script src="<%=request.getContextPath() %>/jquery/jquery-1.12.4.min.js"></script> --%>
+    <script src="<%=request.getContextPath() %>/jquery/jquery-1.12.4.min.js"></script>
     <%-- <%=request.getContextPath() %> --%> 
     <!-- 경로값인 /Egov_WEB를 담고 있음. -->
 </head>
@@ -31,7 +31,7 @@
             <img src="<%=request.getContextPath() %>/images/lefimg.jpg" class="img1">
         </div>
         <div class="login_right">
-        	<form name="LoginForm" id="LoginForm" class="LoginForm" action="loginsubmit.do" method="post">
+        	<form name="LoginForm" id="LoginForm" class="LoginForm" action="submitLogin.do" method="post">
         		<div><span style="color:green;"> RVT 108 </span></div>
         		<div style="height: 20px;"></div>
         		<div>
@@ -44,7 +44,7 @@
     			</div>
     			<input type="password" id="userPw" name="userPw" placeholder="비밀번호"  autocomplete="off"/>
         		<div class="captchamargin1"></div> <!-- 뭐지???? -->
-       			<img src="/Egov_WEB/captcha.do" class="captchaimg" alt="캡차 이미지" title="클릭시 새로고침"/>
+       			<!-- <img src="/River_WEB/captcha.do" class="captchaimg" alt="캡차 이미지" title="클릭시 새로고침"/> -->
        			<input type="text" id="captcha" class="captchatxt" name="captcha" placeholder="위에있는 글자를 입력해주세요" autocomplete="off"/>
             	<div class="captchamargin2"></div>
             	<input type="button" value="로그인" id="loginbtn" disabled onClick="loginClick()">
