@@ -34,7 +34,7 @@ public class LoginController {
 	/**
 	 * 로그인 ID, PW 입력
 	 **/ 
-	@RequestMapping(value="/submitLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/submitLogin.do") /* , method = RequestMethod.POST */
 	public String submit(HttpServletRequest request, ModelMap model) throws Exception {
 		logger.info("##### Controller : submit 진입 #####");
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -45,6 +45,13 @@ public class LoginController {
 			model.addAttribute("userId", resultMap.get("userid").toString());
 		} catch (Exception e) {
 			logger.info("##### 에러로 갔음 #####");
+			
+			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
+			if(errorStr.equals("Validation Error => return Null Error")) {
+				return "redirect:/login.do";
+			} else {
+				// else 
+			}
 			e.printStackTrace();
 			return "error/egovError";
 		} 

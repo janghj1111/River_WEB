@@ -31,7 +31,7 @@
             <img src="<%=request.getContextPath() %>/images/lefimg.jpg" class="img1">
         </div>
         <div class="login_right">
-        	<form name="LoginForm" id="LoginForm" class="LoginForm" action="submitLogin.do" method="post">
+        	<form name="LoginForm" id="LoginForm" class="LoginForm" action="submitLogin.do" > <!-- method="post" -->
         		<div><span style="color:green;"> RVT 108 </span></div>
         		<div style="height: 20px;"></div>
         		<div>

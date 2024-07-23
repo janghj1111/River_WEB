@@ -57,6 +57,11 @@
 	<login-config>
 		<auth-method>BASIC</auth-method>
 	</login-config>
+	
+	<!-- jhj 로그인 만료시간 30분 설정 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
     
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

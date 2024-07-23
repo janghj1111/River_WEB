@@ -3,12 +3,22 @@
 <!-- <mapper namespace="egovframework.sqlmap.login.LoginMapper"></mapper> -->
 <mapper namespace="river.login.dao.LoginMapper">
 
+	 
+	<!-- 회원 확인 -->
 	<select id="checkLogin" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT userid, userpw
 		FROM tbl_user
 		WHERE userid = #{paramId}
 	</select>
+	
+	
+	<!-- 회원 확인 (프로시저) -->
+	<select id="checkLogin2" statementType="CALLABLE" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+   		{ CALL hj_myproc(#{paramId, mode=IN},#{paramPw, mode=IN},#{out_state, mode=OUT, jdbcType=INTEGER, javaType=INTEGER} )}
+   		<!-- { CALL 프로시저명(#{전달할 인자},#{ref_cursor, mode=OUT, jdbcType=타입, javaType=저장할타입, resultMap=oracleResultMap})} -->
+   	</select>
 
+	<!-- request 테스트용 -->
 	<select id="httpServletReqTest" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT 
 			userid
