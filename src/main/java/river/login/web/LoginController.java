@@ -45,7 +45,6 @@ public class LoginController {
 			model.addAttribute("userId", resultMap.get("userid").toString());
 		} catch (Exception e) {
 			logger.info("##### 에러로 갔음 #####");
-			
 			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
 			if(errorStr.equals("Validation Error => return Null Error")) {
 				return "redirect:/login.do";
@@ -55,7 +54,7 @@ public class LoginController {
 			e.printStackTrace();
 			return "error/egovError";
 		} 
-		return "redirect:/logout.do";
+		return "redirect:/main.do";
 	}
 	
 	/**
@@ -82,6 +81,26 @@ public class LoginController {
 			e.printStackTrace();
 			return "error/egovError";
 		} 
+	}
+	
+	/**
+	 * 임시 메인 화면
+	 **/ 
+	@RequestMapping(value = "/main.do") 
+	public String goMain(HttpServletRequest request, ModelMap model) throws Exception {
+		try {
+			loginService.checkUser(request);
+		} catch (Exception e) {
+			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
+			if(errorStr.equals("guestUser Exception")) {
+				return "redirect:/login.do";
+			} else {
+				// else 
+			}
+			e.printStackTrace();
+			return "error/egovError";
+		}
+		return "login/main"; 
 	}
 	
 	/**

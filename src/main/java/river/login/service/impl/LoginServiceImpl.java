@@ -20,6 +20,14 @@ public class LoginServiceImpl extends EgovAbstractServiceImpl implements LoginSe
 	
 	@Resource(name="LoginMapper")
 	LoginMapper loginMapper;
+	
+	// 유저 체크
+	@Override
+	public void checkUser(HttpServletRequest request) throws Exception {
+		if(request.getSession().getAttribute("myid") == null) {
+			throw new Exception("guestUser Exception");
+		}
+	}
 
 	// 로그인 시 체크
 	@Override
