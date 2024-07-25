@@ -35,12 +35,12 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		
 		// request에 있는 title mytextarea 가져온다
 		String title = request.getParameter("title").toString();
-		String mytextarea = request.getParameter("mytextarea").toString();
+		String content = request.getParameter("mytextarea").toString();
 		
 		
 		// XML에 보낼 인자값
 		paramMap.put("in_title", title);
-		paramMap.put("in_mytextarea", mytextarea);
+		paramMap.put("in_content", content);
 		paramMap.put("in_userid", request.getSession().getAttribute("myid"));
 		
 		// XML에서 리턴된 결과값
