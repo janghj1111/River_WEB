@@ -18,4 +18,6 @@ public interface BoardMapper {
 	// 테스트용
 	public HashMap<String, Object> httpServletReqTest(HashMap<String, Object> paramMap) throws Exception;
 
+	public void saveBoard(HashMap<String, Object> paramMap);
+
 }

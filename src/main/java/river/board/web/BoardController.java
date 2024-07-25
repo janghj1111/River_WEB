@@ -51,15 +51,27 @@ public class BoardController {
 	}
 	
 	/**
-	 * 글 작성 추가
+	 * 글 작성 저장
 	 **/ 
-	@RequestMapping(value="/insertBoard.do", method = RequestMethod.POST )
-	public String insertBoard(HttpServletRequest request, ModelMap model) throws Exception {
-		logger.info("##### Controller : insertBoard 진입 #####");
+	@RequestMapping(value="/saveBoard.do", method = RequestMethod.POST )
+	public String saveBoard(HttpServletRequest request, ModelMap model) throws Exception {
+		logger.info("##### Controller : saveBoard 진입 #####");
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
-		//HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		
-		return ""; 
+		try {
+			boardService.saveBoard(request);
+		} catch (Exception e) {
+			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
+			if(errorStr.equals("guestUser Exception")) {
+				return "redirect:/login.do";
+			} else {
+				// else 
+			}
+			e.printStackTrace();
+			return "error/egovError";
+		}
+		//게시글 이용 전 회원 체크
+		return "board/boardWrite"; 
 	}
 	
 //	/**

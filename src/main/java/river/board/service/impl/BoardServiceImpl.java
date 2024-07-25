@@ -23,31 +23,33 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 	// 글 작성 완료
 	@Override
-	public HashMap<String, Object> insertBoard(HttpServletRequest request) throws Exception {
-		logger.info("##### serviceimpl : checkLogin 진입 #####");
+	public void saveBoard(HttpServletRequest request) throws Exception {
+		// 로그인 상태 체크 // 일일이 로그인 체크 하냐고
+		if(request.getSession().getAttribute("myid") == null) {
+			throw new Exception("guestUser Exception");
+		}
+		
+		logger.info("##### serviceimpl : saveBoard 진입 #####");
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
-		// request에 있는 userId와 userPw을 가져온다
-		String userId = request.getParameter("userId").toString();
-		String userPw = request.getParameter("userPw").toString();
-		if( userId.length() > 10) {
-			throw new Exception("Validation Error => length Error");
-		}
+		// request에 있는 title mytextarea 가져온다
+		String title = request.getParameter("title").toString();
+		String mytextarea = request.getParameter("mytextarea").toString();
+		
 		
 		// XML에 보낼 인자값
-		paramMap.put("paramId", userId);
-		paramMap.put("paramPw", userPw);
-		paramMap.put("out_state", -1); // 프로시저 테스트용. 프로시저 타기전에는 -1이 타게되면 0으로 됨
+		paramMap.put("in_title", title);
+		paramMap.put("in_mytextarea", mytextarea);
+		paramMap.put("in_userid", request.getSession().getAttribute("myid"));
 		
-		logger.info("@@@ 인자개수 수정함 ");
 		// XML에서 리턴된 결과값
-//		resultMap = loginMapper.checkLogin2(paramMap);
+		//resultMap = boardMapper.saveBoard(paramMap);
 //		
 //		
 //		if (resultMap == null ) { // 검색된 내용이 없을 경우
 //			throw new Exception("Validation Error => return Null Error");
 //		} 	
-		return resultMap;
+		//return resultMap;
 	}
 }
