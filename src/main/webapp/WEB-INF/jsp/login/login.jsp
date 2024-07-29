@@ -42,7 +42,7 @@
         		<div>
         			비밀번호
     			</div>
-    			<input type="password" id="userPw" name="userPw" placeholder="비밀번호"  autocomplete="off"/>
+    			<input type="password" id="userPw" name="userPw" placeholder="비밀번호"  autocomplete="off" onkeyup="enterkey()"/>
         		<div class="captchamargin1"></div> <!-- 뭐지???? -->
        			<!-- <img src="/River_WEB/captcha.do" class="captchaimg" alt="캡차 이미지" title="클릭시 새로고침"/> -->
        			<input type="text" id="captcha" class="captchatxt" name="captcha" placeholder="위에있는 글자를 입력해주세요" autocomplete="off"/>
@@ -94,6 +94,13 @@ function loginClick(){
 	
 	
 	
+}
+
+function enterkey(){
+	if(window.event.keyCode==13 && !$("#loginbtn").prop("disabled")){
+		console.log("엔터키 허용");	
+		loginClick();
+	}
 }
 
 /* 유효성 체크 */

@@ -46,6 +46,11 @@ public class BoardController {
 			e.printStackTrace();
 			return "error/egovError";
 		}
+		
+//		String userId = request.getSession().getAttribute("userId").toString();
+//		logger.info("userId = " + userId );
+//		model.addAttribute("userId", request.getParameter("userId").toString());
+//		logger.info("model = " + model );
 		//게시글 이용 전 회원 체크
 		return "board/boardWrite"; 
 	}
@@ -53,7 +58,7 @@ public class BoardController {
 	/**
 	 * 글 작성 저장
 	 **/ 
-	@RequestMapping(value="/saveBoard.do", method = RequestMethod.POST )
+	@RequestMapping(value="/saveBoard.do" ) // , method = RequestMethod.POST
 	public String saveBoard(HttpServletRequest request, ModelMap model) throws Exception {
 		logger.info("##### Controller : saveBoard 진입 #####");
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();

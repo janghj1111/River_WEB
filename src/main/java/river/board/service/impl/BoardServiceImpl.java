@@ -31,25 +31,18 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		
 		logger.info("##### serviceimpl : saveBoard 진입 #####");
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		// request에 있는 title mytextarea 가져온다
-		String title = request.getParameter("title").toString();
-		String content = request.getParameter("mytextarea").toString();
+		String title = request.getParameter("title"); //.toString();
+		String content = request.getParameter("mytextarea"); //.toString();
 		
 		
 		// XML에 보낼 인자값
 		paramMap.put("in_title", title);
 		paramMap.put("in_content", content);
 		paramMap.put("in_userid", request.getSession().getAttribute("myid"));
-		
+		paramMap.put("out_state", 0);
 		// XML에서 리턴된 결과값
-		//resultMap = boardMapper.saveBoard(paramMap);
-//		
-//		
-//		if (resultMap == null ) { // 검색된 내용이 없을 경우
-//			throw new Exception("Validation Error => return Null Error");
-//		} 	
-		//return resultMap;
+		boardMapper.saveBoard(paramMap);
 	}
 }

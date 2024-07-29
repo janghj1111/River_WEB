@@ -41,7 +41,7 @@
 </head>
 <body>
 <!-- 자신의 입맞에 맞게 게시판유형도 적어주시면 좋습니다. 예)커뮤니티,공유게시판..-->
-    <form action="insertBoard.do" method="post" enctype="multipart/form-data">
+    <form action="saveBoard.do" method="post" enctype="multipart/form-data">
     <table class="mytable">
         <tr>
             <td class="td1">작성자</td>

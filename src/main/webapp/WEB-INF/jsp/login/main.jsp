@@ -16,10 +16,18 @@
 </head>
 <body>
 	<div> 메인화면 메인화면 메인화면 </div>
+	<div><a href="#">href테스트</a></div>
+	<button onclick="goWrite()">글 작성하기</button>
+
 	<%-- <div>${userId}</div><br />
 	<div>${userPw}</div><br /> --%>
 	
 </body>
 <script type="text/javascript">
+
+function goWrite(){
+	window.location.href = 'boardwrite.do';
+}
+
 </script>
 </html>

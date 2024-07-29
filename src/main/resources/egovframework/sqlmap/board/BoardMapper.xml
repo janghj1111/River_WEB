@@ -14,7 +14,7 @@
 	
 	<!-- 글저장 (프로시저) -->
 	<select id="saveBoard" statementType="CALLABLE" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-   		{ CALL hj_myproc(#{paramId, mode=IN},#{paramPw, mode=IN},#{out_state, mode=OUT, jdbcType=INTEGER, javaType=INTEGER} )}
+   		{ CALL hj_saveboard(#{in_title, mode=IN},#{in_content, mode=IN},#{in_userid, mode=IN},#{out_state, mode=OUT, jdbcType=INTEGER, javaType=INTEGER} )}
    		<!-- { CALL 프로시저명(#{전달할 인자},#{ref_cursor, mode=OUT, jdbcType=타입, javaType=저장할타입, resultMap=oracleResultMap})} -->
    	</select>
 </mapper>
