@@ -106,50 +106,27 @@ public class BoardController {
 //		return "redirect:/logout.do";
 //	}
 //	
-//	/**
-//	 * 로그아웃
-//	 **/ 
-//	@RequestMapping(value="/logout.do")
-//	public String logout(HttpServletRequest request, ModelMap model) throws Exception {
-//		logger.info("##### Controller : logout 진입 #####");
-//		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-//		
-//		String sessionId = request.getSession().getAttribute("myId").toString(); 
-//		logger.info("##### sessionId : " + sessionId);
-//		request.getSession().invalidate(); // 세션에 저장된 데이터 삭제 
-//		
-//		
-//		try {
-//			resultMap = loginService.checkLogin(request);
-//			request.getSession().setAttribute("myid",resultMap.get("userid").toString()); // 세션에 유저ID 넣어줌.
-//			model.addAttribute("userId", resultMap.get("userid").toString());
-//			model.addAttribute("userPw", resultMap.get("userpw").toString());
-//			return "login/login"; 
-//		} catch (Exception e) {
-//			logger.info("##### 에러로 갔음 #####");
-//			e.printStackTrace();
-//			return "error/egovError";
-//		} 
-//	}
-//	
-//	/**
-//	 * 테스트
-//	 **/ 
-//	@RequestMapping(value="/test.do")
-//	public String test(HttpServletRequest request, ModelMap model) throws Exception {
-//		logger.info("##### TEST #####");
-//		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-//		try {
-//			resultMap = loginService.httpServletReqTest(request);
-//			model.addAttribute("userId", resultMap.get("userid").toString());
-//			model.addAttribute("userPw", resultMap.get("userpw").toString());
-//			return "login/test"; 
-//		} catch (Exception e) {
-//			logger.info("##### 에러로 갔음 #####");
-//			e.printStackTrace();
-//			return "error/egovError";
-//		}
-//		
-//	}
+	/**
+	 * 상세 글 화면 조회
+	 **/ 
+	@RequestMapping(value="/boardView.do")
+	public String boardView(HttpServletRequest request, ModelMap model) throws Exception {
+		logger.info("##### Controller : boardView 진입 #####");
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = boardService.showBoard(request); 
+		// 07.30 아래 수정해야함
+		try {
+			resultMap = loginService.checkLogin(request);
+			request.getSession().setAttribute("myid",resultMap.get("userid").toString()); // 세션에 유저ID 넣어줌.
+			model.addAttribute("userId", resultMap.get("userid").toString());
+			model.addAttribute("userPw", resultMap.get("userpw").toString());
+			return "login/login"; 
+		} catch (Exception e) {
+			logger.info("##### 에러로 갔음 #####");
+			e.printStackTrace();
+			return "error/egovError";
+		} 
+	}
+	
 	
 }

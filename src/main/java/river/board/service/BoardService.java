@@ -9,5 +9,6 @@ public interface BoardService {
 
 	public void saveBoard(HttpServletRequest request) throws Exception;
 
-	//public HashMap<String, Object> checkLogin(HttpServletRequest request) throws Exception;
+	public HashMap<String, Object> showBoard(HttpServletRequest request) throws Exception;
+
 }
