@@ -3,18 +3,42 @@
 <!-- <mapper namespace="egovframework.sqlmap.login.LoginMapper"></mapper> -->
 <mapper namespace="river.board.dao.BoardMapper">
 
-	 
-	<!-- 글 확인 -->
-	<!-- <select id="" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		SELECT userid, userpw
-		FROM tbl_user
-		WHERE userid = #{paramId}
-	</select> -->
-	
-	
 	<!-- 글저장 (프로시저) -->
 	<select id="saveBoard" statementType="CALLABLE" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-   		{ CALL hj_saveboard(#{in_title, mode=IN},#{in_content, mode=IN},#{in_userid, mode=IN},#{out_state, mode=OUT, jdbcType=INTEGER, javaType=INTEGER} )}
+   		{ CALL hj_saveboard
+   			(
+   				#{in_title, mode=IN}
+   				,#{in_content, mode=IN}
+   				,#{in_userid, mode=IN}
+   				,#{out_state, mode=OUT, jdbcType=INTEGER, javaType=INTEGER} 
+   			)
+   		}
    		<!-- { CALL 프로시저명(#{전달할 인자},#{ref_cursor, mode=OUT, jdbcType=타입, javaType=저장할타입, resultMap=oracleResultMap})} -->
    	</select>
+   	
+   	<!-- 상세 글 확인 -->
+	<select id="showBoard" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT 
+			boardid
+			,boardtype
+			,group_num
+			,parentid
+			,group_order
+			,group_tab
+			,userid
+			,nickname
+			,writetime
+			,writerip
+			,upduserid
+			,updip
+			,title
+			,boardcontents
+			,seecount
+			,filename
+			,filetype
+			,fileurl
+			,replycount
+		FROM tblboard
+		WHERE boardid = #{in_boardId}
+	</select> 
 </mapper>

@@ -41,6 +41,7 @@
     </style>
 </head>
 <body>
+	<div>${rsMap}</div>
     <table class="mytable">
         <tr>
             <td class="td1">작성자</td>
@@ -90,6 +91,7 @@ function init(){
 		console.log("버튼 숨길필요없음");	
 	}
 }
+
 
 function editDo(){
 	console.log("editDo 실행");
