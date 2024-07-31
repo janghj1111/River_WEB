@@ -5,10 +5,13 @@
 
 	 
 	<!-- 회원 확인 -->
-	<select id="checkLogin" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		SELECT userid, userpw
+	<select id="checkLogin" resultType="river.login.vo.UserVO" parameterType="java.util.HashMap">
+		SELECT 
+			userid AS userId
+			, userpw AS userPw
 		FROM tbl_user
 		WHERE userid = #{paramId}
+		AND userpw = #{paramPw}
 	</select>
 	
 	

@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import river.login.service.LoginService;
+import river.login.vo.UserVO;
 
 @Controller
 public class LoginController {
@@ -41,20 +41,48 @@ public class LoginController {
 		
 		try {
 			resultMap = loginService.checkLogin(request);
-			request.getSession().setAttribute("myid",resultMap.get("userid").toString()); // 세션에 유저ID 넣어줌.
-			model.addAttribute("userId", resultMap.get("userid").toString());
+			request.getSession().setAttribute("userVo",resultMap.get("userVo")); // 세션에 유저ID말고 userVo 넣어줌.
+			//request.getSession().setAttribute("myid",resultMap.get("userid").toString()); // 세션에 유저ID 넣어줌.
+			model.addAttribute("userId", ((UserVO)resultMap.get("userVo")).getUserId());
 		} catch (Exception e) {
-			logger.info("##### 에러로 갔음 #####");
 			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
+			logger.info("!!!! errorStr : " + errorStr);
+			e.printStackTrace();
 			if(errorStr.equals("Validation Error => return Null Error")) {
+				return "redirect:/login.do";
+			} else {
+				// else 
+			}
+			return "error/egovError";
+		} 
+		//return "redirect:/main.do";
+		return "login/main";
+	}
+	
+	/**
+	 * 임시 메인 화면
+	 **/ 
+	@RequestMapping(value = "/main.do") 
+	public String goMain(HttpServletRequest request, ModelMap model) throws Exception {
+		try {
+			//loginService.checkUser(request);
+			logger.info("" + request.getSession().getAttribute("userVo"));
+			// UserVO(userNo=0, userId=jang, userPw=qwer1234, nickName=null, enterIp=null, loginIp=null, loginCount=0, usePermit=null, nouse_Count=0, limitCount=0, condition_Yn=null)
+			if(request.getSession().getAttribute("userVo") == null) {
+				throw new Exception("guestUser Exception");
+			}
+			//model.add
+		} catch (Exception e) {
+			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
+			if(errorStr.equals("guestUser Exception")) {
 				return "redirect:/login.do";
 			} else {
 				// else 
 			}
 			e.printStackTrace();
 			return "error/egovError";
-		} 
-		return "redirect:/main.do";
+		}
+		return "login/main"; 
 	}
 	
 	/**
@@ -81,26 +109,6 @@ public class LoginController {
 			e.printStackTrace();
 			return "error/egovError";
 		} 
-	}
-	
-	/**
-	 * 임시 메인 화면
-	 **/ 
-	@RequestMapping(value = "/main.do") 
-	public String goMain(HttpServletRequest request, ModelMap model) throws Exception {
-		try {
-			loginService.checkUser(request);
-		} catch (Exception e) {
-			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
-			if(errorStr.equals("guestUser Exception")) {
-				return "redirect:/login.do";
-			} else {
-				// else 
-			}
-			e.printStackTrace();
-			return "error/egovError";
-		}
-		return "login/main"; 
 	}
 	
 	/**

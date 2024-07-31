@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import river.login.dao.LoginMapper;
 import river.login.service.LoginService;
+import river.login.vo.UserVO;
 
 @Service("LoginService")
 public class LoginServiceImpl extends EgovAbstractServiceImpl implements LoginService {
@@ -24,9 +25,9 @@ public class LoginServiceImpl extends EgovAbstractServiceImpl implements LoginSe
 	// 유저 체크
 	@Override
 	public void checkUser(HttpServletRequest request) throws Exception {
-		if(request.getSession().getAttribute("myid") == null) {
-			throw new Exception("guestUser Exception");
-		}
+		if(request.getSession().getAttribute("userVo") == null) {
+			throw new Exception("ERROR : UserInfo Null Exception");
+		} 
 	}
 
 	// 로그인 시 체크
@@ -48,14 +49,13 @@ public class LoginServiceImpl extends EgovAbstractServiceImpl implements LoginSe
 		paramMap.put("paramPw", userPw);
 		paramMap.put("out_state", -1); // 프로시저 테스트용. 프로시저 타기전에는 -1이 타게되면 0으로 됨
 		
-		logger.info("@@@ 인자개수 수정함 ");
 		// XML에서 리턴된 결과값
-		resultMap = loginMapper.checkLogin2(paramMap);
-		
-		
-		if (resultMap == null ) { // 검색된 내용이 없을 경우
+		UserVO userVo = loginMapper.checkLogin(paramMap);
+		//resultMap = loginMapper.checkLogin2(paramMap); // 프로시저 테스트용		
+		if ( userVo == null ) { // 검색된 내용이 없을 경우   // vo안쓰고 프로시저 사용할 때는 if(resultMap == null){
 			throw new Exception("Validation Error => return Null Error");
 		} 	
+		resultMap.put("userVo", userVo);
 		return resultMap;
 	}
 

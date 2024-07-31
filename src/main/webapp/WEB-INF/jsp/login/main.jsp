@@ -15,7 +15,7 @@
     <!-- 경로값인 /Egov_WEB를 담고 있음. -->
 </head>
 <body>
-	<div> 메인화면 메인화면 메인화면 </div>
+	<div> ${userId}님, 안녕하세요 </div>
 	<div><a href="#">href테스트</a></div>
 	<button onclick="goWrite()">글 작성하기</button>
 
