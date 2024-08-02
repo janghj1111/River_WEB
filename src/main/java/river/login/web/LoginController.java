@@ -65,12 +65,11 @@ public class LoginController {
 	@RequestMapping(value = "/main.do") 
 	public String goMain(HttpServletRequest request, ModelMap model) throws Exception {
 		try {
-			//loginService.checkUser(request);
+			
 			logger.info("" + request.getSession().getAttribute("userVo"));
 			// UserVO(userNo=0, userId=jang, userPw=qwer1234, nickName=null, enterIp=null, loginIp=null, loginCount=0, usePermit=null, nouse_Count=0, limitCount=0, condition_Yn=null)
-			if(request.getSession().getAttribute("userVo") == null) {
-				throw new Exception("guestUser Exception");
-			}
+			loginService.checkUser(request);
+			
 			//model.add
 		} catch (Exception e) {
 			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
