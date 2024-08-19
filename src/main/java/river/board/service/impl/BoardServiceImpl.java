@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import river.login.vo.UserVO;
 import com.lib.util.ValidationForm;
 
 import river.board.dao.BoardMapper;
@@ -27,8 +28,8 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	@Override
 	public void saveBoard(HttpServletRequest request) throws Exception {
 		// 로그인 상태 체크 // 일일이 로그인 체크 하냐고
-		if(request.getSession().getAttribute("myid") == null) {
-			throw new Exception("guestUser Exception");
+		if(request.getSession().getAttribute("userVo") == null) {
+			throw new Exception("ERROR : UserInfo Null Exception");
 		}
 		
 		logger.info("##### serviceimpl : saveBoard 진입 #####");
@@ -42,7 +43,8 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		// XML에 보낼 인자값
 		paramMap.put("in_title", title);
 		paramMap.put("in_content", content);
-		paramMap.put("in_userid", request.getSession().getAttribute("myid"));
+		//paramMap.put("in_userid", request.getSession().getAttribute("myid"));
+		paramMap.put("in_userid", ((UserVO)request.getSession().getAttribute("userVo")).getUserId());
 		paramMap.put("out_state", 0);
 		// XML에서 리턴된 결과값
 		boardMapper.saveBoard(paramMap);
@@ -53,13 +55,15 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	@Override
 	public HashMap<String, Object> showBoard(HttpServletRequest request) throws Exception {
 		// 로그인 상태 체크 // 일일이 로그인 체크 하냐고
-		if(request.getSession().getAttribute("myid") == null) {
-			throw new Exception("guestUser Exception");
+		if(request.getSession().getAttribute("userVo") == null) {
+			throw new Exception("ERROR : UserInfo Null Exception");
 		}
 		logger.info("##### serviceimpl : showBoard 진입 #####");
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
+
+		String id = ((UserVO)request.getSession().getAttribute("userVo")).getUserId();
 		// request에 있는 boardId 가져온다 ( /boardView.do?boardId=1 )
 		String boardId = request.getParameter("boardId");
 		boolean validflag = false;

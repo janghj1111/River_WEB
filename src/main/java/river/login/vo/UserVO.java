@@ -8,6 +8,7 @@ import lombok.Setter;
 
 @Data
 public class UserVO {
+	// tip. UserVO 드래그 우클릭 후 references project 하면 참조되는 소스파일 파악할 수 있음 
 	// 회사마다 DTO, VO, Bean 등등 식으로 이름이 다를 수 있음
 	
 		// 테이블 컬럼들
