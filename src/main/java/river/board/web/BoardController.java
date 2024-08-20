@@ -1,5 +1,6 @@
 package river.board.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import river.board.service.BoardService;
 import river.login.service.LoginService;
@@ -79,6 +79,32 @@ public class BoardController {
 		//게시글 이용 전 회원 체크
 		return "board/boardWrite"; 
 	}
+	
+	/**
+	 * 글 목록 조회
+	 **/ 
+	@RequestMapping(value="/boardList.do")
+	public String boardList(HttpServletRequest request, ModelMap model) throws Exception {
+		logger.info("##### Controller : boardList 진입 #####");
+		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
+		try {
+			resultList = boardService.showBoardList(request);
+			model.addAttribute("resultList", resultList);	// model.addAttribute("userId", resultMap.get("userId").toString());
+		} catch (Exception e) {
+			String errorStr = e.getMessage(); // serviceImpl에서 throw한 Exception 로그를 가져옴.
+			logger.info("!!!! errorStr : " + errorStr);
+			e.printStackTrace();
+			if(errorStr.equals("guestUser Exception")) {
+				return "redirect:/login.do";
+			} else if(errorStr.indexOf("validation") > -1){
+				return "redirect:/main.do"; 
+			}
+			
+			return "error/egovError";
+		}
+		return "board/boardView";
+	}
+	
 	
 	/**
 	 * 상세 글 화면 조회
